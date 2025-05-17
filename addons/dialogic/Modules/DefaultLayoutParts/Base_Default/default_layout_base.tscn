@@ -1,6 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqpb3ie51rwl5"]
+[gd_scene load_steps=6 format=3 uid="uid://cqpb3ie51rwl5"]
 
 [ext_resource type="Script" path="res://addons/dialogic/Modules/DefaultLayoutParts/Base_Default/default_layout_base.gd" id="1_ifsho"]
+[ext_resource type="PackedScene" uid="uid://dhk6j6eb6e3q" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Choices/vn_choice_layer.tscn" id="2_i5if7"]
+[ext_resource type="Script" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Choices/vn_choice_layer.gd" id="3_vv7pm"]
+[ext_resource type="PackedScene" uid="uid://bquja8jyk8kbr" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Textbox/vn_textbox_layer.tscn" id="4_8kcrv"]
+[ext_resource type="Script" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Textbox/vn_textbox_layer.gd" id="5_cvpl3"]
 
-[node name="DefaultLayoutBase" type="CanvasLayer"]
+[node name="Custom" type="CanvasLayer"]
 script = ExtResource("1_ifsho")
+
+[node name="VN_ChoiceLayer" type="Control" parent="." instance=ExtResource("2_i5if7")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_vv7pm")
+apply_overrides_on_ready = true
+
+[node name="VN_TextboxLayer" type="Control" parent="." instance=ExtResource("4_8kcrv")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_cvpl3")
+box_panel = "res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Textbox/vn_textbox_default_panel.tres"
+box_size = Vector2(550, 150)
+name_label_box_panel = "res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Textbox/vn_textbox_name_label_panel.tres"
+name_label_box_modulate = Color(0, 0, 0, 1)
+apply_overrides_on_ready = true
