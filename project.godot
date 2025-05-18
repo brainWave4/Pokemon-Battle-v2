@@ -23,7 +23,8 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 directories/dch_directory={}
 directories/dtl_directory={
-"awaiting_commands": "res://content/dialogic/awaiting_commands.dtl"
+"awaiting_commands": "res://content/dialogic/awaiting_commands.dtl",
+"used_moves": "res://content/dialogic/used_moves.dtl"
 }
 layout/style_list=[]
 layout/default_style=""

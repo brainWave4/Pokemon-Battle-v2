@@ -80,3 +80,4 @@ apply_overrides_on_ready = true
 [connection signal="pressed" from="Commands/Fight" to="Moves" method="show"]
 [connection signal="pressed" from="Moves/Back" to="Commands" method="show"]
 [connection signal="pressed" from="Moves/Back" to="Moves" method="hide"]
+[connection signal="pressed" from="Moves/Move1" to="Moves" method="hide"]
