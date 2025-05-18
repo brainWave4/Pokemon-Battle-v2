@@ -1,5 +1,8 @@
-[gd_scene format=3 uid="uid://dlrx6rq23rox3"]
+[gd_scene load_steps=2 format=3 uid="uid://dlrx6rq23rox3"]
+
+[ext_resource type="Script" path="res://content/unit.gd" id="1_jb2c4"]
 
 [node name="Unit" type="Node2D"]
+script = ExtResource("1_jb2c4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

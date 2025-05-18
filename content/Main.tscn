@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://xkfk0c5tlhd6"]
+[gd_scene load_steps=11 format=3 uid="uid://xkfk0c5tlhd6"]
 
 [ext_resource type="Script" path="res://content/main.gd" id="1_5vd1s"]
 [ext_resource type="PackedScene" uid="uid://dlrx6rq23rox3" path="res://content/assets/Unit.tscn" id="1_s4xj2"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ba8twpgy3xuk2" path="res://content/assets/battlers/front/098.png" id="3_r4upr"]
 [ext_resource type="Script" path="res://content/dialogic/themes/DefaultLayoutBase/default_layout_base.gd" id="7_sso6b"]
 [ext_resource type="PackedScene" uid="uid://dhk6j6eb6e3q" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Choices/vn_choice_layer.tscn" id="8_0a8j8"]
+[ext_resource type="PackedScene" uid="uid://dyb27rsqk762q" path="res://content/dialogic/themes/DefaultLayoutBase/UnitBar.tscn" id="8_v01ao"]
 [ext_resource type="PackedScene" uid="uid://bquja8jyk8kbr" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Textbox/vn_textbox_layer.tscn" id="9_gq4pe"]
 
 [node name="Main" type="Node"]
@@ -15,20 +16,43 @@ script = ExtResource("1_5vd1s")
 timeline_commands = ExtResource("2_hch6b")
 timeline_used_move = ExtResource("3_gkye3")
 
-[node name="You" parent="." instance=ExtResource("1_s4xj2")]
+[node name="You" parent="." node_paths=PackedStringArray("unit_bar") instance=ExtResource("1_s4xj2")]
 position = Vector2(269, 418)
+unit_bar = NodePath("../Custom/You")
 
 [node name="Sprite2D" parent="You" index="0"]
 texture = ExtResource("2_er4p3")
 
-[node name="Enemy" parent="." instance=ExtResource("1_s4xj2")]
+[node name="Foe" parent="." node_paths=PackedStringArray("unit_bar") instance=ExtResource("1_s4xj2")]
 position = Vector2(889, 165)
+unit_bar = NodePath("../Custom/Foe")
 
-[node name="Sprite2D" parent="Enemy" index="0"]
+[node name="Sprite2D" parent="Foe" index="0"]
 texture = ExtResource("3_r4upr")
 
 [node name="Custom" type="CanvasLayer" parent="."]
 script = ExtResource("7_sso6b")
+
+[node name="Foe" parent="Custom" instance=ExtResource("8_v01ao")]
+
+[node name="Label" parent="Custom/Foe/VBoxContainer" index="0"]
+text = "Onix"
+
+[node name="You" parent="Custom" instance=ExtResource("8_v01ao")]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -27.0
+offset_right = 0.0
+offset_bottom = 27.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Label" parent="Custom/You/VBoxContainer" index="0"]
+text = "Bulbasaur"
 
 [node name="VN_ChoiceLayer" parent="Custom" instance=ExtResource("8_0a8j8")]
 apply_overrides_on_ready = true
@@ -107,4 +131,6 @@ apply_overrides_on_ready = true
 [connection signal="pressed" from="Custom/Moves/Move1" to="Custom/Moves" method="hide"]
 
 [editable path="You"]
-[editable path="Enemy"]
+[editable path="Foe"]
+[editable path="Custom/Foe"]
+[editable path="Custom/You"]
