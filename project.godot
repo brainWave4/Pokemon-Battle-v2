@@ -25,8 +25,8 @@ directories/dch_directory={}
 directories/dtl_directory={
 "awaiting_commands": "res://content/dialogic/awaiting_commands.dtl"
 }
-layout/style_list=["res://content/dialogic/themes/Default.tres"]
-layout/default_style="res://content/dialogic/themes/Default.tres"
+layout/style_list=[]
+layout/default_style=""
 extensions_folder="res://addons/dialogic_additions"
 text/letter_speed=0.01
 text/initial_text_reveal_skippable=true
