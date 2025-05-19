@@ -58,6 +58,7 @@ text = "Bulbasaur"
 apply_overrides_on_ready = true
 
 [node name="Commands" type="GridContainer" parent="Custom"]
+unique_name_in_owner = true
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -123,6 +124,8 @@ layout_mode = 2
 [node name="VN_TextboxLayer" parent="Custom" instance=ExtResource("9_gq4pe")]
 apply_overrides_on_ready = true
 
+[connection signal="cur_hp_is_changed" from="You" to="Custom/You" method="_on_unit_hp_changed"]
+[connection signal="cur_hp_is_changed" from="Foe" to="Custom/Foe" method="_on_unit_hp_changed"]
 [connection signal="pressed" from="Custom/Commands/Fight" to="Custom/Commands" method="hide"]
 [connection signal="pressed" from="Custom/Commands/Fight" to="Custom/Moves" method="show"]
 [connection signal="pressed" from="Custom/Moves/Back" to="Custom/Commands" method="show"]
