@@ -28,7 +28,7 @@ func _dialogic_text_signal(event: String) -> void:
 	match event:
 		"execute_move":
 			var target: BattleUnit = current_sequence["target"]
-			target.take_damage(5)
+			target.take_damage(current_sequence["power"])
 			
 			var target_bar = target.unit_bar
 			await target_bar.hp_tween_finished
@@ -46,7 +46,14 @@ func _dialogic_text_signal(event: String) -> void:
 				change_state(INPUT)
 
 
-func _on_move_pressed() -> void:
+func _on_move_pressed(custom_pow: int = 5) -> void:
+	pending_sequences = [
+			{
+				"user": $You,
+				"target": $Foe,
+				"power": custom_pow
+			}
+		]
 	change_state(EXECUTION)
 
 
@@ -58,16 +65,13 @@ func change_state(val: int) -> void:
 			Dialogic.start_timeline(timeline_commands)
 			%Commands.show()
 		EXECUTION:
-			pending_sequences = [
-				{
-					"user": $You,
-					"target": $Foe
-				},
+			pending_sequences.append(
 				{
 					"user": $Foe,
-					"target": $You
+					"target": $You,
+					"power": 5
 				}
-			]
+			)
 			execute_sequence()
 		VICTORY:
 			Dialogic.start_timeline(timeline_victory)
