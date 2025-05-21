@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://xkfk0c5tlhd6"]
+[gd_scene load_steps=25 format=3 uid="uid://xkfk0c5tlhd6"]
 
 [ext_resource type="Script" path="res://content/main.gd" id="1_5vd1s"]
 [ext_resource type="PackedScene" uid="uid://dlrx6rq23rox3" path="res://content/assets/Unit.tscn" id="1_s4xj2"]
@@ -9,10 +9,45 @@
 [ext_resource type="Resource" path="res://content/dialogic/victory.dtl" id="4_n33iv"]
 [ext_resource type="Resource" path="res://content/dialogic/defeat.dtl" id="5_kiryf"]
 [ext_resource type="Script" path="res://content/unit_side.gd" id="6_dwncn"]
+[ext_resource type="Script" path="res://content/unit_species.gd" id="7_or047"]
 [ext_resource type="Script" path="res://content/dialogic/themes/DefaultLayoutBase/default_layout_base.gd" id="7_sso6b"]
 [ext_resource type="PackedScene" uid="uid://dhk6j6eb6e3q" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Choices/vn_choice_layer.tscn" id="8_0a8j8"]
 [ext_resource type="PackedScene" uid="uid://dyb27rsqk762q" path="res://content/dialogic/themes/DefaultLayoutBase/UnitBar.tscn" id="8_v01ao"]
+[ext_resource type="Texture2D" uid="uid://cwgy288y30341" path="res://content/assets/battlers/back/155.png" id="9_dcgcp"]
 [ext_resource type="PackedScene" uid="uid://bquja8jyk8kbr" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Textbox/vn_textbox_layer.tscn" id="9_gq4pe"]
+[ext_resource type="Texture2D" uid="uid://bd5ofyow4uj3w" path="res://content/assets/battlers/back/158.png" id="10_w8xbe"]
+[ext_resource type="Texture2D" uid="uid://c7qjt5isbosbm" path="res://content/assets/battlers/front/165.png" id="13_4hnpm"]
+[ext_resource type="Texture2D" uid="uid://7jhtg5tin2w3" path="res://content/assets/battlers/front/025.png" id="14_brns3"]
+
+[sub_resource type="Resource" id="Resource_p5idy"]
+script = ExtResource("7_or047")
+name = "Bulbasaur"
+sprite = ExtResource("2_er4p3")
+
+[sub_resource type="Resource" id="Resource_n480m"]
+script = ExtResource("7_or047")
+name = "Cyndaquil"
+sprite = ExtResource("9_dcgcp")
+
+[sub_resource type="Resource" id="Resource_arsca"]
+script = ExtResource("7_or047")
+name = "Totodile"
+sprite = ExtResource("10_w8xbe")
+
+[sub_resource type="Resource" id="Resource_80ypr"]
+script = ExtResource("7_or047")
+name = "Onix"
+sprite = ExtResource("3_r4upr")
+
+[sub_resource type="Resource" id="Resource_b4ekj"]
+script = ExtResource("7_or047")
+name = "Ledyba"
+sprite = ExtResource("13_4hnpm")
+
+[sub_resource type="Resource" id="Resource_5r6pa"]
+script = ExtResource("7_or047")
+name = "Pikachu"
+sprite = ExtResource("14_brns3")
 
 [node name="Main" type="Node" node_paths=PackedStringArray("side_allies", "side_foes")]
 script = ExtResource("1_5vd1s")
@@ -26,6 +61,7 @@ timeline_defeat = ExtResource("5_kiryf")
 [node name="Allies" type="Node2D" parent="."]
 position = Vector2(269, 418)
 script = ExtResource("6_dwncn")
+team = Array[ExtResource("7_or047")]([SubResource("Resource_p5idy"), SubResource("Resource_n480m"), SubResource("Resource_arsca")])
 
 [node name="BattleUnit" parent="Allies" node_paths=PackedStringArray("unit_bar") instance=ExtResource("1_s4xj2")]
 unit_bar = NodePath("../../Custom/You")
@@ -36,6 +72,7 @@ texture = ExtResource("2_er4p3")
 [node name="Foes" type="Node2D" parent="."]
 position = Vector2(889, 165)
 script = ExtResource("6_dwncn")
+team = Array[ExtResource("7_or047")]([SubResource("Resource_80ypr"), SubResource("Resource_b4ekj"), SubResource("Resource_5r6pa")])
 
 [node name="BattleUnit" parent="Foes" node_paths=PackedStringArray("unit_bar") instance=ExtResource("1_s4xj2")]
 unit_bar = NodePath("../../Custom/Foe")
