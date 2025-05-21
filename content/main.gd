@@ -1,5 +1,13 @@
 extends Node
 
+## A Node2D representing all units on your side.
+@export var side_allies: Node2D
+
+## A Node2D representing all units on your opponent's side.
+@export var side_foes: Node2D
+
+@export_group("Timelines")
+
 ## Timeline for asking a general command.
 @export var timeline_commands: DialogicTimeline
 
@@ -19,7 +27,13 @@ var turn_number := 0
 var pending_sequences: Array[Dictionary]
 var current_sequence: Dictionary
 
+var you: Node2D
+var foe: Node2D
+
 func _ready() -> void:
+	you = side_allies.get_child(0)
+	foe = side_foes.get_child(0)
+	
 	Dialogic.text_signal.connect(_dialogic_text_signal)
 	change_state(INPUT)
 
@@ -34,7 +48,7 @@ func _dialogic_text_signal(event: String) -> void:
 			await target_bar.hp_tween_finished
 			
 			if target.cur_hp <= 0:
-				if target == $Foe:
+				if target == foe:
 					change_state(VICTORY)
 				else:
 					change_state(LOSE)
@@ -49,8 +63,8 @@ func _dialogic_text_signal(event: String) -> void:
 func _on_move_pressed(custom_pow: int = 5) -> void:
 	pending_sequences = [
 			{
-				"user": $You,
-				"target": $Foe,
+				"user": you,
+				"target": foe,
 				"power": custom_pow
 			}
 		]
@@ -67,8 +81,8 @@ func change_state(val: int) -> void:
 		EXECUTION:
 			pending_sequences.append(
 				{
-					"user": $Foe,
-					"target": $You,
+					"user": foe,
+					"target": you,
 					"power": 5
 				}
 			)

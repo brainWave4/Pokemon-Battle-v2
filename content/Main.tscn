@@ -13,25 +13,31 @@
 [ext_resource type="PackedScene" uid="uid://dyb27rsqk762q" path="res://content/dialogic/themes/DefaultLayoutBase/UnitBar.tscn" id="8_v01ao"]
 [ext_resource type="PackedScene" uid="uid://bquja8jyk8kbr" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Textbox/vn_textbox_layer.tscn" id="9_gq4pe"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" node_paths=PackedStringArray("side_allies", "side_foes")]
 script = ExtResource("1_5vd1s")
+side_allies = NodePath("Allies")
+side_foes = NodePath("Foes")
 timeline_commands = ExtResource("2_hch6b")
 timeline_used_move = ExtResource("3_gkye3")
 timeline_victory = ExtResource("4_n33iv")
 timeline_defeat = ExtResource("5_kiryf")
 
-[node name="You" parent="." node_paths=PackedStringArray("unit_bar") instance=ExtResource("1_s4xj2")]
+[node name="Allies" type="Node2D" parent="."]
 position = Vector2(269, 418)
-unit_bar = NodePath("../Custom/You")
 
-[node name="Sprite2D" parent="You" index="0"]
+[node name="BattleUnit" parent="Allies" node_paths=PackedStringArray("unit_bar") instance=ExtResource("1_s4xj2")]
+unit_bar = NodePath("../../Custom/You")
+
+[node name="Sprite2D" parent="Allies/BattleUnit" index="0"]
 texture = ExtResource("2_er4p3")
 
-[node name="Foe" parent="." node_paths=PackedStringArray("unit_bar") instance=ExtResource("1_s4xj2")]
+[node name="Foes" type="Node2D" parent="."]
 position = Vector2(889, 165)
-unit_bar = NodePath("../Custom/Foe")
 
-[node name="Sprite2D" parent="Foe" index="0"]
+[node name="BattleUnit" parent="Foes" node_paths=PackedStringArray("unit_bar") instance=ExtResource("1_s4xj2")]
+unit_bar = NodePath("../../Custom/Foe")
+
+[node name="Sprite2D" parent="Foes/BattleUnit" index="0"]
 texture = ExtResource("3_r4upr")
 
 [node name="Custom" type="CanvasLayer" parent="."]
@@ -128,8 +134,8 @@ layout_mode = 2
 [node name="VN_TextboxLayer" parent="Custom" instance=ExtResource("9_gq4pe")]
 apply_overrides_on_ready = true
 
-[connection signal="cur_hp_is_changed" from="You" to="Custom/You" method="_on_unit_hp_changed"]
-[connection signal="cur_hp_is_changed" from="Foe" to="Custom/Foe" method="_on_unit_hp_changed"]
+[connection signal="cur_hp_is_changed" from="Allies/BattleUnit" to="Custom/You" method="_on_unit_hp_changed"]
+[connection signal="cur_hp_is_changed" from="Foes/BattleUnit" to="Custom/Foe" method="_on_unit_hp_changed"]
 [connection signal="pressed" from="Custom/Commands/Fight" to="Custom/Commands" method="hide"]
 [connection signal="pressed" from="Custom/Commands/Fight" to="Custom/Moves" method="show"]
 [connection signal="pressed" from="Custom/Moves/Back" to="Custom/Commands" method="show"]
@@ -139,7 +145,7 @@ apply_overrides_on_ready = true
 [connection signal="pressed" from="Custom/Moves/Move2" to="Custom/Commands" method="hide"]
 [connection signal="pressed" from="Custom/Moves/Move2" to="." method="_on_move_pressed" binds= [10]]
 
-[editable path="You"]
-[editable path="Foe"]
+[editable path="Allies/BattleUnit"]
+[editable path="Foes/BattleUnit"]
 [editable path="Custom/Foe"]
 [editable path="Custom/You"]
