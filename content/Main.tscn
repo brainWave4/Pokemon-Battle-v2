@@ -72,9 +72,6 @@ team = Array[ExtResource("7_or047")]([SubResource("Resource_p5idy"), SubResource
 [node name="BattleUnit" parent="Allies" node_paths=PackedStringArray("unit_bar") instance=ExtResource("1_s4xj2")]
 unit_bar = NodePath("../../Custom/You")
 
-[node name="Sprite2D" parent="Allies/BattleUnit" index="0"]
-texture = ExtResource("2_er4p3")
-
 [node name="Foes" type="Node2D" parent="."]
 position = Vector2(889, 165)
 script = ExtResource("6_dwncn")
@@ -83,18 +80,14 @@ team = Array[ExtResource("7_or047")]([SubResource("Resource_80ypr"), SubResource
 [node name="BattleUnit" parent="Foes" node_paths=PackedStringArray("unit_bar") instance=ExtResource("1_s4xj2")]
 unit_bar = NodePath("../../Custom/Foe")
 
-[node name="Sprite2D" parent="Foes/BattleUnit" index="0"]
-texture = ExtResource("3_r4upr")
-
 [node name="Custom" type="CanvasLayer" parent="."]
 script = ExtResource("7_sso6b")
 
 [node name="Foe" parent="Custom" instance=ExtResource("8_v01ao")]
-
-[node name="Label" parent="Custom/Foe/VBoxContainer" index="0"]
-text = "Onix"
+visible = false
 
 [node name="You" parent="Custom" instance=ExtResource("8_v01ao")]
+visible = false
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -106,9 +99,6 @@ offset_right = 0.0
 offset_bottom = 27.0
 grow_horizontal = 0
 grow_vertical = 2
-
-[node name="Label" parent="Custom/You/VBoxContainer" index="0"]
-text = "Bulbasaur"
 
 [node name="VN_ChoiceLayer" parent="Custom" instance=ExtResource("8_0a8j8")]
 apply_overrides_on_ready = true
@@ -191,8 +181,3 @@ apply_overrides_on_ready = true
 [connection signal="pressed" from="Custom/Moves/Move1" to="Custom/Moves" method="hide"]
 [connection signal="pressed" from="Custom/Moves/Move2" to="Custom/Commands" method="hide"]
 [connection signal="pressed" from="Custom/Moves/Move2" to="." method="_on_move_pressed" binds= [10]]
-
-[editable path="Allies/BattleUnit"]
-[editable path="Foes/BattleUnit"]
-[editable path="Custom/Foe"]
-[editable path="Custom/You"]

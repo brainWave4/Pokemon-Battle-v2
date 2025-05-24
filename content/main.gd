@@ -69,10 +69,14 @@ func _dialogic_text_signal(event: String) -> void:
 		"lead_out":
 			pending_sequences = [
 				{
-					"timeline": timeline_foe_sends_out
+					"timeline": timeline_foe_sends_out,
+					"unit": side_foes.get_child(0),
+					"switchin": side_foes.team[0]
 				},
 				{
-					"timeline": timeline_you_send_out
+					"timeline": timeline_you_send_out,
+					"unit": side_allies.get_child(0),
+					"switchin": side_allies.team[0]
 				}
 			]
 			execute_sequence()
@@ -135,6 +139,7 @@ func next_in_sequence() -> void:
 
 
 func send_out_anim(unit: BattleUnit) -> void:
+	current_sequence["unit"].set_unit(current_sequence["switchin"])
 	var anim_player: AnimationPlayer = unit.get_node("AnimationPlayer")
 	anim_player.play(TRACK_SENDOUT)
 	

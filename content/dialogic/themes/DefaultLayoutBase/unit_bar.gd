@@ -9,3 +9,8 @@ func _on_unit_hp_changed(cur_hp: int) -> void:
 	bar_tween.tween_callback(func ():
 		hp_tween_finished.emit()
 		)
+
+
+func set_unit(val: UnitSpecies) -> void:
+	$VBoxContainer/Label.set_text(val.name)
+	show()
