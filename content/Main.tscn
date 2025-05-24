@@ -12,7 +12,7 @@
 [ext_resource type="Resource" path="res://content/dialogic/timelines/victory.dtl" id="4_n33iv"]
 [ext_resource type="Resource" path="res://content/dialogic/timelines/defeat.dtl" id="5_kiryf"]
 [ext_resource type="Script" path="res://content/unit_side.gd" id="6_dwncn"]
-[ext_resource type="Script" path="res://content/unit_species.gd" id="7_or047"]
+[ext_resource type="Script" path="res://content/battle_unit.gd" id="7_or047"]
 [ext_resource type="Script" path="res://content/dialogic/themes/DefaultLayoutBase/default_layout_base.gd" id="7_sso6b"]
 [ext_resource type="PackedScene" uid="uid://dhk6j6eb6e3q" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Choices/vn_choice_layer.tscn" id="8_0a8j8"]
 [ext_resource type="PackedScene" uid="uid://dyb27rsqk762q" path="res://content/dialogic/themes/DefaultLayoutBase/UnitBar.tscn" id="8_v01ao"]

@@ -11,6 +11,6 @@ func _on_unit_hp_changed(cur_hp: int) -> void:
 		)
 
 
-func set_unit(val: UnitSpecies) -> void:
+func set_unit(val: BattleUnit) -> void:
 	$VBoxContainer/Label.set_text(val.name)
 	show()

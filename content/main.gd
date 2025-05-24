@@ -36,8 +36,8 @@ var turn_number := 0
 var pending_sequences: Array[Dictionary]
 var current_sequence: Dictionary
 
-var you: BattleUnit
-var foe: BattleUnit
+var you: DisplayedUnit
+var foe: DisplayedUnit
 
 const TRACK_SENDOUT := "send_out"
 
@@ -52,7 +52,7 @@ func _ready() -> void:
 func _dialogic_text_signal(event: String) -> void:
 	match event:
 		"execute_move":
-			var target: BattleUnit = current_sequence["target"]
+			var target: DisplayedUnit = current_sequence["target"]
 			target.take_damage(current_sequence["power"])
 			
 			var target_bar = target.unit_bar
@@ -138,7 +138,7 @@ func next_in_sequence() -> void:
 		change_state(INPUT)
 
 
-func send_out_anim(unit: BattleUnit) -> void:
+func send_out_anim(unit: DisplayedUnit) -> void:
 	current_sequence["unit"].set_unit(current_sequence["switchin"])
 	var anim_player: AnimationPlayer = unit.get_node("AnimationPlayer")
 	anim_player.play(TRACK_SENDOUT)
