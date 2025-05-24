@@ -58,7 +58,7 @@ func _dialogic_text_signal(event: String) -> void:
 			var target_bar = target.unit_bar
 			await target_bar.hp_tween_finished
 			
-			if target.cur_hp <= 0:
+			if target.cur_unit.cur_hp <= 0:
 				if target == foe:
 					change_state(VICTORY)
 				else:
