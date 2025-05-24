@@ -58,7 +58,7 @@ func _dialogic_text_signal(event: String) -> void:
 			var target_bar = target.unit_bar
 			await target_bar.hp_tween_finished
 			
-			if target.cur_unit.cur_hp <= 0:
+			if target.is_out_of_hp():
 				if target == foe:
 					change_state(VICTORY)
 				else:
@@ -93,6 +93,7 @@ func _on_move_pressed(custom_pow: int = 5) -> void:
 			{
 				"user": you,
 				"target": foe,
+				"move_name": "Horn Drill" if custom_pow > 5 else "Tackle",
 				"power": custom_pow,
 				"timeline": timeline_used_move
 			}
@@ -105,6 +106,7 @@ func change_state(val: int) -> void:
 	
 	match current_state:
 		INPUT:
+			Dialogic.VAR.Battle.User = side_allies.get_child(0).get_unit_name()
 			Dialogic.start_timeline(timeline_commands)
 			%Commands.show()
 		EXECUTION:
@@ -112,6 +114,7 @@ func change_state(val: int) -> void:
 				{
 					"user": foe,
 					"target": you,
+					"move_name": "Tackle",
 					"power": 5,
 					"timeline": timeline_used_move
 				}
@@ -127,6 +130,15 @@ func change_state(val: int) -> void:
 
 func execute_sequence() -> void:
 	current_sequence = pending_sequences[0]
+	
+	if "user" in current_sequence:
+		Dialogic.VAR.Battle.User = current_sequence["user"].get_unit_name()
+	elif "switchin" in current_sequence:
+		Dialogic.VAR.Battle.User = current_sequence["switchin"].name
+	
+	if "move_name" in current_sequence:
+		Dialogic.VAR.Battle.Move = current_sequence["move_name"]
+	
 	Dialogic.start_timeline(current_sequence["timeline"])
 
 

@@ -1,1 +1,1 @@
-You opponent sends out Someone![signal=send_out_foe]
+{Battle.Opponent} sends out {Battle.User}![signal=send_out_foe]

@@ -1,1 +1,1 @@
-Someone used Something![signal=execute_move]
+{Battle.User} used {Battle.Move}![signal=execute_move]

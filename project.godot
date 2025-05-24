@@ -56,6 +56,13 @@ save/encryption_on_exports_only=true
 layout/end_behaviour=0
 text/autopauses={}
 glossary/default_case_sensitive=true
+variables={
+"Battle": {
+"Move": "",
+"Opponent": "Trainer",
+"User": ""
+}
+}
 
 [editor_plugins]
 

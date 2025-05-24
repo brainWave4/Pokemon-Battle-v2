@@ -15,6 +15,14 @@ func _ready() -> void:
 	team = get_parent().team
 
 
+func get_unit_name() -> String:
+	return cur_unit.name
+
+
+func is_out_of_hp() -> bool:
+	return cur_unit.cur_hp <= 0
+
+
 func set_unit(val: BattleUnit) -> void:
 	cur_unit = val
 	$Sprite2D.set_texture(val.sprite)
