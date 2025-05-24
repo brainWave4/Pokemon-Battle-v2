@@ -26,8 +26,11 @@ directories/dch_directory={}
 directories/dtl_directory={
 "awaiting_commands": "res://content/dialogic/awaiting_commands.dtl",
 "defeat": "res://content/dialogic/defeat.dtl",
+"foe_sends_out": "res://content/dialogic/foe_sends_out.dtl",
+"start_battle": "res://content/dialogic/start_battle.dtl",
 "used_moves": "res://content/dialogic/used_moves.dtl",
-"victory": "res://content/dialogic/victory.dtl"
+"victory": "res://content/dialogic/victory.dtl",
+"you_send_out": "res://content/dialogic/you_send_out.dtl"
 }
 layout/style_list=[]
 layout/default_style=""

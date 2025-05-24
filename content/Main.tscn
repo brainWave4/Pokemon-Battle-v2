@@ -1,11 +1,14 @@
-[gd_scene load_steps=25 format=3 uid="uid://xkfk0c5tlhd6"]
+[gd_scene load_steps=28 format=3 uid="uid://xkfk0c5tlhd6"]
 
 [ext_resource type="Script" path="res://content/main.gd" id="1_5vd1s"]
 [ext_resource type="PackedScene" uid="uid://dlrx6rq23rox3" path="res://content/assets/Unit.tscn" id="1_s4xj2"]
 [ext_resource type="Texture2D" uid="uid://bpt84mvt7qfx" path="res://content/assets/battlers/back/001.png" id="2_er4p3"]
 [ext_resource type="Resource" path="res://content/dialogic/awaiting_commands.dtl" id="2_hch6b"]
+[ext_resource type="Resource" path="res://content/dialogic/start_battle.dtl" id="2_hrqpf"]
+[ext_resource type="Resource" path="res://content/dialogic/foe_sends_out.dtl" id="3_1ffgq"]
 [ext_resource type="Resource" path="res://content/dialogic/used_moves.dtl" id="3_gkye3"]
 [ext_resource type="Texture2D" uid="uid://ba8twpgy3xuk2" path="res://content/assets/battlers/front/098.png" id="3_r4upr"]
+[ext_resource type="Resource" path="res://content/dialogic/you_send_out.dtl" id="4_bddmi"]
 [ext_resource type="Resource" path="res://content/dialogic/victory.dtl" id="4_n33iv"]
 [ext_resource type="Resource" path="res://content/dialogic/defeat.dtl" id="5_kiryf"]
 [ext_resource type="Script" path="res://content/unit_side.gd" id="6_dwncn"]
@@ -53,6 +56,9 @@ sprite = ExtResource("14_brns3")
 script = ExtResource("1_5vd1s")
 side_allies = NodePath("Allies")
 side_foes = NodePath("Foes")
+timeline_start = ExtResource("2_hrqpf")
+timeline_foe_sends_out = ExtResource("3_1ffgq")
+timeline_you_send_out = ExtResource("4_bddmi")
 timeline_commands = ExtResource("2_hch6b")
 timeline_used_move = ExtResource("3_gkye3")
 timeline_victory = ExtResource("4_n33iv")
@@ -109,6 +115,7 @@ apply_overrides_on_ready = true
 
 [node name="Commands" type="GridContainer" parent="Custom"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
