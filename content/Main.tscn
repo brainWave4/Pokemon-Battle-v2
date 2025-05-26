@@ -181,5 +181,5 @@ apply_overrides_on_ready = true
 [connection signal="pressed" from="Custom/Moves/Back" to="Custom/Moves" method="hide"]
 [connection signal="pressed" from="Custom/Moves/Move1" to="." method="_on_move_pressed"]
 [connection signal="pressed" from="Custom/Moves/Move1" to="Custom/Moves" method="hide"]
-[connection signal="pressed" from="Custom/Moves/Move2" to="Custom/Commands" method="hide"]
+[connection signal="pressed" from="Custom/Moves/Move2" to="Custom/Moves" method="hide"]
 [connection signal="pressed" from="Custom/Moves/Move2" to="." method="_on_move_pressed" binds= [10]]
