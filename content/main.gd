@@ -80,14 +80,18 @@ func _dialogic_text_signal(event: String) -> void:
 			await target_bar.hp_tween_finished
 			
 			if target.is_out_of_hp():
+				remove_user_from_sequence(target)
 				if await target.play_anim("knocked_out"):
 					Dialogic.start_timeline(timeline_koed)
 				
-				if await Dialogic.signal_event == "ko" and !target.get_parent().has_available_units():
-					if target == foe:
-						change_state(VICTORY)
+				if await Dialogic.signal_event == "ko":
+					if target.get_parent().has_available_units():
+						next_in_sequence()
 					else:
-						change_state(LOSE)
+						if target == foe:
+							change_state(VICTORY)
+						else:
+							change_state(LOSE)
 			
 			else:
 				next_in_sequence()
@@ -158,6 +162,12 @@ func next_in_sequence() -> void:
 		execute_sequence()
 	else:
 		change_state(INPUT)
+
+
+func remove_user_from_sequence(user: DisplayedUnit) -> void:
+	for sequence: Dictionary in pending_sequences:
+		if "user" in sequence and sequence["user"] == user:
+			pending_sequences.erase(sequence)
 
 
 func send_out_anim(unit: DisplayedUnit) -> void:
