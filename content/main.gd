@@ -2,12 +2,6 @@ extends Node
 
 enum {INPUT, EXECUTION, START, VICTORY, LOSE}
 
-## Tracks for general unit animations
-
-const TRACK_KO := "knocked_out"
-
-const TRACK_SENDOUT := "send_out"
-
 ## A Node2D representing all units on your side.
 @export var side_allies: Node2D
 
@@ -67,10 +61,7 @@ func _dialogic_text_signal(event: String) -> void:
 			await target_bar.hp_tween_finished
 			
 			if target.is_out_of_hp():
-				var anim_player := target.get_node("AnimationPlayer")
-				anim_player.play(TRACK_KO)
-				
-				if await anim_player.animation_finished == TRACK_KO:
+				if await target.play_anim("knocked_out"):
 					Dialogic.start_timeline(timeline_koed)
 				
 				if target == foe:
@@ -166,8 +157,6 @@ func next_in_sequence() -> void:
 
 func send_out_anim(unit: DisplayedUnit) -> void:
 	current_sequence["unit"].set_unit(current_sequence["switchin"])
-	var anim_player: AnimationPlayer = unit.get_node("AnimationPlayer")
-	anim_player.play(TRACK_SENDOUT)
 	
-	if await anim_player.animation_finished == TRACK_SENDOUT:
+	if await unit.play_anim("send_out"):
 		next_in_sequence()

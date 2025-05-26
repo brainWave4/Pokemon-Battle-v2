@@ -23,6 +23,14 @@ func is_out_of_hp() -> bool:
 	return cur_unit.cur_hp <= 0
 
 
+## Plays a unit animation. Returns true
+## when the animation finishes playing the given track.
+func play_anim(track: String) -> bool:
+	$AnimationPlayer.play(track)
+	
+	return await $AnimationPlayer.animation_finished == track
+
+
 func set_unit(val: BattleUnit) -> void:
 	cur_unit = val
 	$Sprite2D.set_texture(val.sprite)
