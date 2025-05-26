@@ -64,10 +64,11 @@ func _dialogic_text_signal(event: String) -> void:
 				if await target.play_anim("knocked_out"):
 					Dialogic.start_timeline(timeline_koed)
 				
-				if target == foe:
-					change_state(VICTORY)
-				else:
-					change_state(LOSE)
+				if await Dialogic.signal_event == "ko":
+					if target == foe:
+						change_state(VICTORY)
+					else:
+						change_state(LOSE)
 			
 			else:
 				next_in_sequence()
