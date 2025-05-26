@@ -27,6 +27,7 @@ directories/dtl_directory={
 "awaiting_commands": "res://content/dialogic/timelines/awaiting_commands.dtl",
 "defeat": "res://content/dialogic/timelines/defeat.dtl",
 "foe_sends_out": "res://content/dialogic/timelines/foe_sends_out.dtl",
+"knocked_out": "res://content/dialogic/timelines/knocked_out.dtl",
 "start_battle": "res://content/dialogic/timelines/start_battle.dtl",
 "used_moves": "res://content/dialogic/timelines/used_moves.dtl",
 "victory": "res://content/dialogic/timelines/victory.dtl",
@@ -60,6 +61,7 @@ variables={
 "Battle": {
 "Move": "",
 "Opponent": "Trainer",
+"Target": "",
 "User": ""
 }
 }

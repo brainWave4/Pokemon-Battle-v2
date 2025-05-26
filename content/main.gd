@@ -1,5 +1,13 @@
 extends Node
 
+enum {INPUT, EXECUTION, START, VICTORY, LOSE}
+
+## Tracks for general unit animations
+
+const TRACK_KO := "knocked_out"
+
+const TRACK_SENDOUT := "send_out"
+
 ## A Node2D representing all units on your side.
 @export var side_allies: Node2D
 
@@ -23,13 +31,15 @@ extends Node
 ## Timeline declaring unit using a move.
 @export var timeline_used_move: DialogicTimeline
 
+## Timeline when a unit's HP reaches zero.
+@export var timeline_koed: DialogicTimeline
+
 ## Timeline when the player wins.
 @export var timeline_victory: DialogicTimeline
 
 ## Timeline when the player loses.
 @export var timeline_defeat: DialogicTimeline
 
-enum {INPUT, EXECUTION, START, VICTORY, LOSE}
 var current_state: int
 
 var turn_number := 0
@@ -38,8 +48,6 @@ var current_sequence: Dictionary
 
 var you: DisplayedUnit
 var foe: DisplayedUnit
-
-const TRACK_SENDOUT := "send_out"
 
 func _ready() -> void:
 	you = side_allies.get_child(0)
@@ -59,12 +67,19 @@ func _dialogic_text_signal(event: String) -> void:
 			await target_bar.hp_tween_finished
 			
 			if target.is_out_of_hp():
+				var anim_player := target.get_node("AnimationPlayer")
+				anim_player.play(TRACK_KO)
+				
+				if await anim_player.animation_finished == TRACK_KO:
+					Dialogic.start_timeline(timeline_koed)
+				
 				if target == foe:
 					change_state(VICTORY)
 				else:
 					change_state(LOSE)
 			
-			next_in_sequence()
+			else:
+				next_in_sequence()
 		
 		"lead_out":
 			pending_sequences = [
@@ -133,11 +148,10 @@ func execute_sequence() -> void:
 	
 	if "user" in current_sequence:
 		Dialogic.VAR.Battle.User = current_sequence["user"].get_unit_name()
+		Dialogic.VAR.Battle.Move = current_sequence["move_name"]
+		Dialogic.VAR.Battle.Target = current_sequence["target"].get_unit_name()
 	elif "switchin" in current_sequence:
 		Dialogic.VAR.Battle.User = current_sequence["switchin"].name
-	
-	if "move_name" in current_sequence:
-		Dialogic.VAR.Battle.Move = current_sequence["move_name"]
 	
 	Dialogic.start_timeline(current_sequence["timeline"])
 
