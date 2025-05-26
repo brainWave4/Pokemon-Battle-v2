@@ -82,6 +82,7 @@ func _dialogic_text_signal(event: String) -> void:
 			if target.is_out_of_hp():
 				remove_user_from_sequence(target)
 				if await target.play_anim("knocked_out"):
+					target.unit_bar.hide()
 					Dialogic.start_timeline(timeline_koed)
 				
 				if await Dialogic.signal_event == "ko":
