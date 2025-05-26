@@ -47,8 +47,27 @@ func _ready() -> void:
 	you = side_allies.get_child(0)
 	foe = side_foes.get_child(0)
 	
+	Dialogic.signal_event.connect(_dialogic_event_signal)
 	Dialogic.text_signal.connect(_dialogic_text_signal)
 	change_state(START)
+
+
+func _dialogic_event_signal(event: Variant) -> void:
+	match event:
+		"lead_out":
+			pending_sequences = [
+				{
+					"timeline": timeline_foe_sends_out,
+					"unit": side_foes.get_child(0),
+					"switchin": side_foes.team[0]
+				},
+				{
+					"timeline": timeline_you_send_out,
+					"unit": side_allies.get_child(0),
+					"switchin": side_allies.team[0]
+				}
+			]
+			execute_sequence()
 
 
 func _dialogic_text_signal(event: String) -> void:
@@ -72,21 +91,6 @@ func _dialogic_text_signal(event: String) -> void:
 			
 			else:
 				next_in_sequence()
-		
-		"lead_out":
-			pending_sequences = [
-				{
-					"timeline": timeline_foe_sends_out,
-					"unit": side_foes.get_child(0),
-					"switchin": side_foes.team[0]
-				},
-				{
-					"timeline": timeline_you_send_out,
-					"unit": side_allies.get_child(0),
-					"switchin": side_allies.team[0]
-				}
-			]
-			execute_sequence()
 		
 		"send_out_foe":
 			send_out_anim(foe)

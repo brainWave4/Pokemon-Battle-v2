@@ -1,1 +1,2 @@
-{Battle.Opponent} challenges you to a battle![signal=lead_out]
+{Battle.Opponent} challenges you to a battle!
+[signal arg="lead_out"]
