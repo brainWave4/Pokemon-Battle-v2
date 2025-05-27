@@ -87,6 +87,11 @@ func _dialogic_text_signal(event: String) -> void:
 				
 				if await Dialogic.signal_event == "ko":
 					if target.get_parent().has_available_units():
+						var target_side: UnitSide = target.get_parent()
+						pending_sequences.append({
+							"timeline": timeline_foe_sends_out if target_side.get_index() else timeline_you_send_out,
+							"unit": target,
+							"switchin": target_side.get_next_available()})
 						next_in_sequence()
 					else:
 						if target == foe:
