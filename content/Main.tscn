@@ -27,31 +27,37 @@
 script = ExtResource("7_or047")
 name = "Bulbasaur"
 sprite = ExtResource("2_er4p3")
+max_hp = 10
 
 [sub_resource type="Resource" id="Resource_n480m"]
 script = ExtResource("7_or047")
 name = "Cyndaquil"
 sprite = ExtResource("9_dcgcp")
+max_hp = 8
 
 [sub_resource type="Resource" id="Resource_arsca"]
 script = ExtResource("7_or047")
 name = "Totodile"
 sprite = ExtResource("10_w8xbe")
+max_hp = 9
 
 [sub_resource type="Resource" id="Resource_80ypr"]
 script = ExtResource("7_or047")
 name = "Onix"
 sprite = ExtResource("3_r4upr")
+max_hp = 10
 
 [sub_resource type="Resource" id="Resource_b4ekj"]
 script = ExtResource("7_or047")
 name = "Ledyba"
 sprite = ExtResource("13_4hnpm")
+max_hp = 5
 
 [sub_resource type="Resource" id="Resource_5r6pa"]
 script = ExtResource("7_or047")
 name = "Pikachu"
 sprite = ExtResource("14_brns3")
+max_hp = 7
 
 [node name="Main" type="Node" node_paths=PackedStringArray("side_allies", "side_foes")]
 script = ExtResource("1_5vd1s")
