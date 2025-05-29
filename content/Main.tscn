@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://xkfk0c5tlhd6"]
+[gd_scene load_steps=30 format=3 uid="uid://xkfk0c5tlhd6"]
 
 [ext_resource type="Script" path="res://content/main.gd" id="1_5vd1s"]
 [ext_resource type="PackedScene" uid="uid://dlrx6rq23rox3" path="res://content/assets/Unit.tscn" id="1_s4xj2"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://bd5ofyow4uj3w" path="res://content/assets/battlers/back/158.png" id="10_w8xbe"]
 [ext_resource type="Texture2D" uid="uid://c7qjt5isbosbm" path="res://content/assets/battlers/front/165.png" id="13_4hnpm"]
 [ext_resource type="Texture2D" uid="uid://7jhtg5tin2w3" path="res://content/assets/battlers/front/025.png" id="14_brns3"]
+[ext_resource type="PackedScene" uid="uid://steu6rpwduei" path="res://content/dialogic/themes/DefaultLayoutBase/AllyBar.tscn" id="23_3uwp2"]
 
 [sub_resource type="Resource" id="Resource_p5idy"]
 script = ExtResource("7_or047")
@@ -94,7 +95,7 @@ script = ExtResource("7_sso6b")
 [node name="Foe" parent="Custom" instance=ExtResource("8_v01ao")]
 visible = false
 
-[node name="You" parent="Custom" instance=ExtResource("8_v01ao")]
+[node name="You" parent="Custom" instance=ExtResource("23_3uwp2")]
 visible = false
 anchors_preset = 6
 anchor_left = 1.0

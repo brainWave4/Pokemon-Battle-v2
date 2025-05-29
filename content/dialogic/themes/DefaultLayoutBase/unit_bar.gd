@@ -1,6 +1,8 @@
 extends PanelContainer
 class_name UnitBar
 
+signal unit_is_changed
+
 signal hp_tween_finished
 
 func _on_unit_hp_changed(cur_hp: int) -> void:
@@ -12,7 +14,10 @@ func _on_unit_hp_changed(cur_hp: int) -> void:
 
 
 func set_unit(val: BattleUnit) -> void:
-	$VBoxContainer/Label.set_text(val.name)
+	$VBoxContainer/Name.set_text(val.name)
 	%HP_Bar.set_max(val.max_hp)
 	%HP_Bar.set_value_no_signal(val.cur_hp)
+	
+	unit_is_changed.emit()
+	
 	show()
