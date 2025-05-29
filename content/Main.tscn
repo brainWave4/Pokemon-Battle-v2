@@ -132,7 +132,6 @@ text = "Fight"
 
 [node name="Switch" type="Button" parent="Custom/Commands"]
 layout_mode = 2
-disabled = true
 text = "Switch"
 
 [node name="Items" type="Button" parent="Custom/Commands"]
@@ -180,13 +179,37 @@ layout_mode = 2
 [node name="VN_TextboxLayer" parent="Custom" instance=ExtResource("9_gq4pe")]
 apply_overrides_on_ready = true
 
+[node name="Shade" type="ColorRect" parent="Custom"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.4)
+
+[node name="Team" type="VBoxContainer" parent="Custom"]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="Custom/Team"]
+layout_mode = 2
+text = "Back"
+
 [connection signal="cur_hp_is_changed" from="Allies/BattleUnit" to="Custom/You" method="_on_unit_hp_changed"]
 [connection signal="cur_hp_is_changed" from="Foes/BattleUnit" to="Custom/Foe" method="_on_unit_hp_changed"]
 [connection signal="pressed" from="Custom/Commands/Fight" to="Custom/Commands" method="hide"]
 [connection signal="pressed" from="Custom/Commands/Fight" to="Custom/Moves" method="show"]
+[connection signal="pressed" from="Custom/Commands/Switch" to="Custom/Commands" method="hide"]
+[connection signal="pressed" from="Custom/Commands/Switch" to="Custom/Shade" method="show"]
+[connection signal="pressed" from="Custom/Commands/Switch" to="Custom/Team" method="show"]
 [connection signal="pressed" from="Custom/Moves/Back" to="Custom/Commands" method="show"]
 [connection signal="pressed" from="Custom/Moves/Back" to="Custom/Moves" method="hide"]
 [connection signal="pressed" from="Custom/Moves/Move1" to="." method="_on_move_pressed"]
 [connection signal="pressed" from="Custom/Moves/Move1" to="Custom/Moves" method="hide"]
 [connection signal="pressed" from="Custom/Moves/Move2" to="Custom/Moves" method="hide"]
 [connection signal="pressed" from="Custom/Moves/Move2" to="." method="_on_move_pressed" binds= [10]]
+[connection signal="pressed" from="Custom/Team/Button" to="Custom/Commands" method="show"]
+[connection signal="pressed" from="Custom/Team/Button" to="Custom/Shade" method="hide"]
+[connection signal="pressed" from="Custom/Team/Button" to="Custom/Team" method="hide"]
