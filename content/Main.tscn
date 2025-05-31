@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://xkfk0c5tlhd6"]
+[gd_scene load_steps=31 format=3 uid="uid://xkfk0c5tlhd6"]
 
 [ext_resource type="Script" path="res://content/main.gd" id="1_5vd1s"]
 [ext_resource type="PackedScene" uid="uid://dlrx6rq23rox3" path="res://content/assets/Unit.tscn" id="1_s4xj2"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://c7qjt5isbosbm" path="res://content/assets/battlers/front/165.png" id="13_4hnpm"]
 [ext_resource type="Texture2D" uid="uid://7jhtg5tin2w3" path="res://content/assets/battlers/front/025.png" id="14_brns3"]
 [ext_resource type="PackedScene" uid="uid://steu6rpwduei" path="res://content/dialogic/themes/DefaultLayoutBase/AllyBar.tscn" id="23_3uwp2"]
+[ext_resource type="PackedScene" uid="uid://xh5vyb41xi4t" path="res://content/SwitchOption.tscn" id="24_j6g48"]
 
 [sub_resource type="Resource" id="Resource_p5idy"]
 script = ExtResource("7_or047")
@@ -188,14 +189,68 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.4)
 
+[node name="Back" type="Button" parent="Custom"]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -45.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "Back"
+
 [node name="Team" type="VBoxContainer" parent="Custom"]
 visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Button" type="Button" parent="Custom/Team"]
+[node name="SwitchOption" parent="Custom/Team" instance=ExtResource("24_j6g48")]
 layout_mode = 2
-text = "Back"
+
+[node name="SwitchOption2" parent="Custom/Team" instance=ExtResource("24_j6g48")]
+layout_mode = 2
+
+[node name="SwitchOption3" parent="Custom/Team" instance=ExtResource("24_j6g48")]
+layout_mode = 2
+
+[node name="SwitchOption4" parent="Custom/Team" instance=ExtResource("24_j6g48")]
+layout_mode = 2
+
+[node name="SwitchOption5" parent="Custom/Team" instance=ExtResource("24_j6g48")]
+layout_mode = 2
+
+[node name="SwitchOption6" parent="Custom/Team" instance=ExtResource("24_j6g48")]
+layout_mode = 2
+
+[node name="SelectedTeamOptions" type="VBoxContainer" parent="Custom"]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Switch" type="Button" parent="Custom/SelectedTeamOptions"]
+layout_mode = 2
+text = "Swap In"
+alignment = 0
+
+[node name="Stats" type="Button" parent="Custom/SelectedTeamOptions"]
+layout_mode = 2
+disabled = true
+text = "Check Summary"
+alignment = 0
+
+[node name="Cancel" type="Button" parent="Custom/SelectedTeamOptions"]
+layout_mode = 2
+text = "Cancel"
+alignment = 0
 
 [connection signal="cur_hp_is_changed" from="Allies/BattleUnit" to="Custom/You" method="_on_unit_hp_changed"]
 [connection signal="cur_hp_is_changed" from="Foes/BattleUnit" to="Custom/Foe" method="_on_unit_hp_changed"]
@@ -203,6 +258,7 @@ text = "Back"
 [connection signal="pressed" from="Custom/Commands/Fight" to="Custom/Moves" method="show"]
 [connection signal="pressed" from="Custom/Commands/Switch" to="Custom/Commands" method="hide"]
 [connection signal="pressed" from="Custom/Commands/Switch" to="Custom/Shade" method="show"]
+[connection signal="pressed" from="Custom/Commands/Switch" to="Custom/Back" method="show"]
 [connection signal="pressed" from="Custom/Commands/Switch" to="Custom/Team" method="show"]
 [connection signal="pressed" from="Custom/Moves/Back" to="Custom/Commands" method="show"]
 [connection signal="pressed" from="Custom/Moves/Back" to="Custom/Moves" method="hide"]
@@ -210,6 +266,14 @@ text = "Back"
 [connection signal="pressed" from="Custom/Moves/Move1" to="Custom/Moves" method="hide"]
 [connection signal="pressed" from="Custom/Moves/Move2" to="Custom/Moves" method="hide"]
 [connection signal="pressed" from="Custom/Moves/Move2" to="." method="_on_move_pressed" binds= [10]]
-[connection signal="pressed" from="Custom/Team/Button" to="Custom/Commands" method="show"]
-[connection signal="pressed" from="Custom/Team/Button" to="Custom/Shade" method="hide"]
-[connection signal="pressed" from="Custom/Team/Button" to="Custom/Team" method="hide"]
+[connection signal="pressed" from="Custom/Back" to="Custom/Commands" method="show"]
+[connection signal="pressed" from="Custom/Back" to="Custom/Shade" method="hide"]
+[connection signal="pressed" from="Custom/Back" to="Custom/Back" method="hide"]
+[connection signal="pressed" from="Custom/Back" to="Custom/Team" method="hide"]
+[connection signal="pressed" from="Custom/Team/SwitchOption" to="Custom/SelectedTeamOptions" method="show"]
+[connection signal="pressed" from="Custom/Team/SwitchOption2" to="Custom/SelectedTeamOptions" method="show"]
+[connection signal="pressed" from="Custom/Team/SwitchOption3" to="Custom/SelectedTeamOptions" method="show"]
+[connection signal="pressed" from="Custom/Team/SwitchOption4" to="Custom/SelectedTeamOptions" method="show"]
+[connection signal="pressed" from="Custom/Team/SwitchOption5" to="Custom/SelectedTeamOptions" method="show"]
+[connection signal="pressed" from="Custom/Team/SwitchOption6" to="Custom/SelectedTeamOptions" method="show"]
+[connection signal="pressed" from="Custom/SelectedTeamOptions/Cancel" to="Custom/SelectedTeamOptions" method="hide"]
