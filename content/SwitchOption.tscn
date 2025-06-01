@@ -14,6 +14,7 @@ layout_mode = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
 layout_mode = 2
+step = 1.0
 show_percentage = false
 
 [node name="HP" type="Label" parent="VBoxContainer"]
