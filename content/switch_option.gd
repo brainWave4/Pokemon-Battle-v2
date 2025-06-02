@@ -1,13 +1,19 @@
 extends PanelContainer
+class_name SwitchOption
 
 signal pressed
+signal unit_is_selected(unit: BattleUnit)
 
+var battle_unit: BattleUnit
 
 func _on_button_pressed() -> void:
 	pressed.emit()
+	unit_is_selected.emit(battle_unit)
 
 
 func set_unit(unit: BattleUnit) -> void:
+	battle_unit = unit
+	
 	$VBoxContainer/Name.set_text(unit.name)
 	
 	var cur_hp: int = unit.cur_hp
