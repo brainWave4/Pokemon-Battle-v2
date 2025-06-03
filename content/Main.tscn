@@ -280,4 +280,8 @@ alignment = 0
 [connection signal="pressed" from="Custom/Team/SwitchOption4" to="Custom/SelectedTeamOptions" method="show"]
 [connection signal="pressed" from="Custom/Team/SwitchOption5" to="Custom/SelectedTeamOptions" method="show"]
 [connection signal="pressed" from="Custom/Team/SwitchOption6" to="Custom/SelectedTeamOptions" method="show"]
+[connection signal="pressed" from="Custom/SelectedTeamOptions/Switch" to="." method="_on_switchin_pressed"]
+[connection signal="pressed" from="Custom/SelectedTeamOptions/Switch" to="Custom/Shade" method="hide"]
+[connection signal="pressed" from="Custom/SelectedTeamOptions/Switch" to="Custom/Team" method="hide"]
+[connection signal="pressed" from="Custom/SelectedTeamOptions/Switch" to="Custom/SelectedTeamOptions" method="hide"]
 [connection signal="pressed" from="Custom/SelectedTeamOptions/Cancel" to="Custom/SelectedTeamOptions" method="hide"]

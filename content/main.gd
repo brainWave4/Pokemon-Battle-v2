@@ -122,6 +122,10 @@ func _on_move_pressed(custom_pow: int = 5) -> void:
 	change_state(EXECUTION)
 
 
+func _on_switchin_pressed() -> void:
+	pass
+
+
 func change_state(val: int) -> void:
 	current_state = val
 	
