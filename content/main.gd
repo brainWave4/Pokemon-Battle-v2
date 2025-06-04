@@ -8,6 +8,9 @@ enum {INPUT, EXECUTION, START, VICTORY, LOSE}
 ## A Node2D representing all units on your opponent's side.
 @export var side_foes: Node2D
 
+## A VBoxContainer displaying your team.
+@export var team: VBoxContainer
+
 @export_group("Timelines")
 
 ## Timeline when the battle starts.
@@ -24,6 +27,12 @@ enum {INPUT, EXECUTION, START, VICTORY, LOSE}
 
 ## Timeline declaring unit using a move.
 @export var timeline_used_move: DialogicTimeline
+
+## Timeline when you withdraw your unit.
+@export var timeline_you_recall: DialogicTimeline
+
+## Timeline when your opponent withdraw their unit.
+@export var timeline_foe_recall: DialogicTimeline
 
 ## Timeline when a unit's HP reaches zero.
 @export var timeline_koed: DialogicTimeline
@@ -102,6 +111,9 @@ func _dialogic_text_signal(event: String) -> void:
 			else:
 				next_in_sequence()
 		
+		"recall":
+			recall_anim(current_sequence["unit"])
+		
 		"send_out_foe":
 			send_out_anim(foe)
 		
@@ -123,7 +135,15 @@ func _on_move_pressed(custom_pow: int = 5) -> void:
 
 
 func _on_switchin_pressed() -> void:
-	pass
+	pending_sequences = [
+			{
+				"unit": side_allies.get_child(0),
+				"switchout": you,
+				"switchin": team.selected_unit,
+				"timeline": timeline_you_recall
+			}
+		]
+	change_state(EXECUTION)
 
 
 func change_state(val: int) -> void:
@@ -160,6 +180,8 @@ func execute_sequence() -> void:
 		Dialogic.VAR.Battle.User = current_sequence["user"].get_unit_name()
 		Dialogic.VAR.Battle.Move = current_sequence["move_name"]
 		Dialogic.VAR.Battle.Target = current_sequence["target"].get_unit_name()
+	elif "switchout" in current_sequence:
+		Dialogic.VAR.Battle.User = current_sequence["switchout"].get_unit_name()
 	elif "switchin" in current_sequence:
 		Dialogic.VAR.Battle.User = current_sequence["switchin"].name
 	
@@ -172,6 +194,12 @@ func next_in_sequence() -> void:
 		execute_sequence()
 	else:
 		change_state(INPUT)
+
+
+func recall_anim(unit: DisplayedUnit) -> void:
+	if await unit.play_anim("recall"):
+		Dialogic.VAR.Battle.User = current_sequence["switchin"].name
+		Dialogic.start_timeline(timeline_you_send_out)
 
 
 func remove_user_from_sequence(user: DisplayedUnit) -> void:

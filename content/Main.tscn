@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://xkfk0c5tlhd6"]
+[gd_scene load_steps=34 format=3 uid="uid://xkfk0c5tlhd6"]
 
 [ext_resource type="Script" path="res://content/main.gd" id="1_5vd1s"]
 [ext_resource type="PackedScene" uid="uid://dlrx6rq23rox3" path="res://content/assets/Unit.tscn" id="1_s4xj2"]
@@ -14,8 +14,10 @@
 [ext_resource type="Script" path="res://content/unit_side.gd" id="6_dwncn"]
 [ext_resource type="Script" path="res://content/battle_unit.gd" id="7_or047"]
 [ext_resource type="Script" path="res://content/dialogic/themes/DefaultLayoutBase/default_layout_base.gd" id="7_sso6b"]
+[ext_resource type="Resource" path="res://content/dialogic/timelines/you_recall.dtl" id="7_v62wb"]
 [ext_resource type="Resource" path="res://content/dialogic/timelines/knocked_out.dtl" id="7_yf8il"]
 [ext_resource type="PackedScene" uid="uid://dhk6j6eb6e3q" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Choices/vn_choice_layer.tscn" id="8_0a8j8"]
+[ext_resource type="Resource" path="res://content/dialogic/timelines/foe_recall.dtl" id="8_401jf"]
 [ext_resource type="PackedScene" uid="uid://dyb27rsqk762q" path="res://content/dialogic/themes/DefaultLayoutBase/UnitBar.tscn" id="8_v01ao"]
 [ext_resource type="Texture2D" uid="uid://cwgy288y30341" path="res://content/assets/battlers/back/155.png" id="9_dcgcp"]
 [ext_resource type="PackedScene" uid="uid://bquja8jyk8kbr" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Textbox/vn_textbox_layer.tscn" id="9_gq4pe"]
@@ -62,15 +64,18 @@ name = "Pikachu"
 sprite = ExtResource("14_brns3")
 max_hp = 7
 
-[node name="Main" type="Node" node_paths=PackedStringArray("side_allies", "side_foes")]
+[node name="Main" type="Node" node_paths=PackedStringArray("side_allies", "side_foes", "team")]
 script = ExtResource("1_5vd1s")
 side_allies = NodePath("Allies")
 side_foes = NodePath("Foes")
+team = NodePath("Custom/Team")
 timeline_start = ExtResource("2_hrqpf")
 timeline_foe_sends_out = ExtResource("3_1ffgq")
 timeline_you_send_out = ExtResource("4_bddmi")
 timeline_commands = ExtResource("2_hch6b")
 timeline_used_move = ExtResource("3_gkye3")
+timeline_you_recall = ExtResource("7_v62wb")
+timeline_foe_recall = ExtResource("8_401jf")
 timeline_koed = ExtResource("7_yf8il")
 timeline_victory = ExtResource("4_n33iv")
 timeline_defeat = ExtResource("5_kiryf")
@@ -282,6 +287,7 @@ alignment = 0
 [connection signal="pressed" from="Custom/Team/SwitchOption6" to="Custom/SelectedTeamOptions" method="show"]
 [connection signal="pressed" from="Custom/SelectedTeamOptions/Switch" to="." method="_on_switchin_pressed"]
 [connection signal="pressed" from="Custom/SelectedTeamOptions/Switch" to="Custom/Shade" method="hide"]
+[connection signal="pressed" from="Custom/SelectedTeamOptions/Switch" to="Custom/Back" method="hide"]
 [connection signal="pressed" from="Custom/SelectedTeamOptions/Switch" to="Custom/Team" method="hide"]
 [connection signal="pressed" from="Custom/SelectedTeamOptions/Switch" to="Custom/SelectedTeamOptions" method="hide"]
 [connection signal="pressed" from="Custom/SelectedTeamOptions/Cancel" to="Custom/SelectedTeamOptions" method="hide"]
