@@ -20,3 +20,11 @@ func has_available_units() -> bool:
 			return true
 	
 	return false
+
+
+func has_unit_out_in_battle(unit: BattleUnit) -> bool:
+	for child: DisplayedUnit in get_children():
+		if child.cur_unit == unit:
+			return true
+	
+	return false
