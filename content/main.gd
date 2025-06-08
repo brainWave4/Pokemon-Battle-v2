@@ -11,6 +11,8 @@ enum {INPUT, EXECUTION, START, VICTORY, LOSE}
 ## A VBoxContainer displaying your team.
 @export var team: VBoxContainer
 
+@export var textboxes: Array[DialogicLayoutLayer]
+
 @export_group("Timelines")
 
 ## Timeline when the battle starts.
@@ -44,6 +46,8 @@ enum {INPUT, EXECUTION, START, VICTORY, LOSE}
 @export var timeline_defeat: DialogicTimeline
 
 var current_state: int
+
+var current_textbox := 0
 
 var turn_number := 0
 var pending_sequences: Array[Dictionary]
@@ -171,6 +175,12 @@ func change_state(val: int) -> void:
 			Dialogic.start_timeline(timeline_victory)
 		LOSE:
 			Dialogic.start_timeline(timeline_defeat)
+
+
+func change_textbox(i: int) -> void:
+	textboxes[current_textbox].disabled = true
+	current_textbox = i
+	textboxes[current_textbox].disabled = false
 
 
 func execute_sequence() -> void:

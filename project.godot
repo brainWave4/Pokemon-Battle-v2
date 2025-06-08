@@ -24,12 +24,14 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 directories/dch_directory={}
 directories/dtl_directory={
+"already_in_battle": "res://content/dialogic/timelines/already_in_battle.dtl",
 "awaiting_commands": "res://content/dialogic/timelines/awaiting_commands.dtl",
 "defeat": "res://content/dialogic/timelines/defeat.dtl",
 "foe_recall": "res://content/dialogic/timelines/foe_recall.dtl",
 "foe_sends_out": "res://content/dialogic/timelines/foe_sends_out.dtl",
 "knocked_out": "res://content/dialogic/timelines/knocked_out.dtl",
 "start_battle": "res://content/dialogic/timelines/start_battle.dtl",
+"too_weak_to_battle": "res://content/dialogic/timelines/too_weak_to_battle.dtl",
 "used_moves": "res://content/dialogic/timelines/used_moves.dtl",
 "victory": "res://content/dialogic/timelines/victory.dtl",
 "you_recall": "res://content/dialogic/timelines/you_recall.dtl",

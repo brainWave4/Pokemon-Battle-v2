@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://xkfk0c5tlhd6"]
+[gd_scene load_steps=37 format=3 uid="uid://xkfk0c5tlhd6"]
 
 [ext_resource type="Script" path="res://content/main.gd" id="1_5vd1s"]
 [ext_resource type="PackedScene" uid="uid://dlrx6rq23rox3" path="res://content/assets/Unit.tscn" id="1_s4xj2"]
@@ -28,6 +28,8 @@
 [ext_resource type="Script" path="res://content/team.gd" id="24_a6a4m"]
 [ext_resource type="PackedScene" uid="uid://xh5vyb41xi4t" path="res://content/SwitchOption.tscn" id="24_j6g48"]
 [ext_resource type="Script" path="res://content/swapin_btn.gd" id="28_15k26"]
+[ext_resource type="Resource" path="res://content/dialogic/timelines/already_in_battle.dtl" id="29_g7l3l"]
+[ext_resource type="Resource" path="res://content/dialogic/timelines/too_weak_to_battle.dtl" id="30_qwkeg"]
 
 [sub_resource type="Resource" id="Resource_p5idy"]
 script = ExtResource("7_or047")
@@ -65,11 +67,12 @@ name = "Pikachu"
 sprite = ExtResource("14_brns3")
 max_hp = 7
 
-[node name="Main" type="Node" node_paths=PackedStringArray("side_allies", "side_foes", "team")]
+[node name="Main" type="Node" node_paths=PackedStringArray("side_allies", "side_foes", "team", "textboxes")]
 script = ExtResource("1_5vd1s")
 side_allies = NodePath("Allies")
 side_foes = NodePath("Foes")
 team = NodePath("Custom/Team")
+textboxes = [NodePath("Custom/VN_TextboxLayer"), NodePath("Custom/ErrorTextbox")]
 timeline_start = ExtResource("2_hrqpf")
 timeline_foe_sends_out = ExtResource("3_1ffgq")
 timeline_you_send_out = ExtResource("4_bddmi")
@@ -245,13 +248,17 @@ grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="Switch" type="Button" parent="Custom/SelectedTeamOptions" node_paths=PackedStringArray("your_side", "team")]
+[node name="Switch" type="Button" parent="Custom/SelectedTeamOptions" node_paths=PackedStringArray("main", "your_side", "team", "error_textbox")]
 layout_mode = 2
 text = "Swap In"
 alignment = 0
 script = ExtResource("28_15k26")
+main = NodePath("../../..")
 your_side = NodePath("../../../Allies")
 team = NodePath("../../Team")
+error_textbox = NodePath("../../ErrorTextbox")
+timeline_already_in = ExtResource("29_g7l3l")
+timeline_no_hp = ExtResource("30_qwkeg")
 
 [node name="Stats" type="Button" parent="Custom/SelectedTeamOptions"]
 layout_mode = 2
@@ -263,6 +270,10 @@ alignment = 0
 layout_mode = 2
 text = "Cancel"
 alignment = 0
+
+[node name="ErrorTextbox" parent="Custom" instance=ExtResource("9_gq4pe")]
+visible = false
+disabled = true
 
 [connection signal="cur_hp_is_changed" from="Allies/BattleUnit" to="Custom/You" method="_on_unit_hp_changed"]
 [connection signal="cur_hp_is_changed" from="Foes/BattleUnit" to="Custom/Foe" method="_on_unit_hp_changed"]
