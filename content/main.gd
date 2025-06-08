@@ -125,12 +125,12 @@ func _dialogic_text_signal(event: String) -> void:
 			send_out_anim(you)
 
 
-func _on_move_pressed(custom_pow: int = 5) -> void:
+func _on_move_pressed(custom_pow: int = 10) -> void:
 	pending_sequences = [
 			{
 				"user": you,
 				"target": foe,
-				"move_name": "Horn Drill" if custom_pow > 5 else "Tackle",
+				"move_name": "Horn Drill" if custom_pow < 6 else "Tackle",
 				"power": custom_pow,
 				"timeline": timeline_used_move
 			}
@@ -164,7 +164,7 @@ func change_state(val: int) -> void:
 					"user": foe,
 					"target": you,
 					"move_name": "Tackle",
-					"power": 5,
+					"power": 10,
 					"timeline": timeline_used_move
 				}
 			)

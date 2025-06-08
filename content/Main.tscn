@@ -288,7 +288,7 @@ disabled = true
 [connection signal="pressed" from="Custom/Moves/Move1" to="." method="_on_move_pressed"]
 [connection signal="pressed" from="Custom/Moves/Move1" to="Custom/Moves" method="hide"]
 [connection signal="pressed" from="Custom/Moves/Move2" to="Custom/Moves" method="hide"]
-[connection signal="pressed" from="Custom/Moves/Move2" to="." method="_on_move_pressed" binds= [10]]
+[connection signal="pressed" from="Custom/Moves/Move2" to="." method="_on_move_pressed" binds= [5]]
 [connection signal="pressed" from="Custom/Back" to="Custom/Commands" method="show"]
 [connection signal="pressed" from="Custom/Back" to="Custom/Shade" method="hide"]
 [connection signal="pressed" from="Custom/Back" to="Custom/Back" method="hide"]
