@@ -67,12 +67,13 @@ name = "Pikachu"
 sprite = ExtResource("14_brns3")
 max_hp = 7
 
-[node name="Main" type="Node" node_paths=PackedStringArray("side_allies", "side_foes", "team", "textboxes")]
+[node name="Main" type="Node" node_paths=PackedStringArray("side_allies", "side_foes", "team", "textboxes", "swapin_btn")]
 script = ExtResource("1_5vd1s")
 side_allies = NodePath("Allies")
 side_foes = NodePath("Foes")
 team = NodePath("Custom/Team")
 textboxes = [NodePath("Custom/VN_TextboxLayer"), NodePath("Custom/ErrorTextbox")]
+swapin_btn = NodePath("Custom/SelectedTeamOptions/Switch")
 timeline_start = ExtResource("2_hrqpf")
 timeline_foe_sends_out = ExtResource("3_1ffgq")
 timeline_you_send_out = ExtResource("4_bddmi")
@@ -275,6 +276,8 @@ alignment = 0
 visible = false
 disabled = true
 
+[connection signal="user_needs_reinforcement" from="." to="Custom/Shade" method="show"]
+[connection signal="user_needs_reinforcement" from="." to="Custom/Team" method="show"]
 [connection signal="cur_hp_is_changed" from="Allies/BattleUnit" to="Custom/You" method="_on_unit_hp_changed"]
 [connection signal="cur_hp_is_changed" from="Foes/BattleUnit" to="Custom/Foe" method="_on_unit_hp_changed"]
 [connection signal="pressed" from="Custom/Commands/Fight" to="Custom/Commands" method="hide"]

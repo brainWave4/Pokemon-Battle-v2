@@ -1,5 +1,11 @@
 extends Node
 
+## Emitted at the end of turn, when your unit is
+## knocked out and you still have avaiable units
+## to choose from to swap in and continue the
+## battle.
+signal user_needs_reinforcement
+
 enum {INPUT, EXECUTION, START, VICTORY, LOSE}
 
 ## A Node2D representing all units on your side.
@@ -12,6 +18,8 @@ enum {INPUT, EXECUTION, START, VICTORY, LOSE}
 @export var team: VBoxContainer
 
 @export var textboxes: Array[DialogicLayoutLayer]
+
+@export var swapin_btn: Button
 
 @export_group("Timelines")
 
@@ -104,7 +112,7 @@ func _dialogic_text_signal(event: String) -> void:
 						pending_sequences.append({
 							"timeline": timeline_foe_sends_out if target_side.get_index() else timeline_you_send_out,
 							"unit": target,
-							"switchin": target_side.get_next_available()})
+							"switchin": null})
 						next_in_sequence()
 					else:
 						if target == foe:
@@ -139,15 +147,16 @@ func _on_move_pressed(custom_pow: int = 10) -> void:
 
 
 func _on_switchin_pressed() -> void:
-	pending_sequences = [
-			{
-				"unit": side_allies.get_child(0),
-				"switchout": you,
-				"switchin": team.selected_unit,
-				"timeline": timeline_you_recall
-			}
-		]
-	change_state(EXECUTION)
+	if current_state == INPUT:
+		pending_sequences = [
+				{
+					"unit": side_allies.get_child(0),
+					"switchout": you,
+					"switchin": team.selected_unit,
+					"timeline": timeline_you_recall
+				}
+			]
+		change_state(EXECUTION)
 
 
 func change_state(val: int) -> void:
@@ -193,6 +202,15 @@ func execute_sequence() -> void:
 	elif "switchout" in current_sequence:
 		Dialogic.VAR.Battle.User = current_sequence["switchout"].get_unit_name()
 	elif "switchin" in current_sequence:
+		if current_sequence["switchin"] == null:
+			var unit_side: UnitSide = current_sequence["unit"].get_parent()
+			if unit_side.get_index() == 0:
+				user_needs_reinforcement.emit()
+				await swapin_btn.approved_pressed
+				current_sequence["switchin"] = team.selected_unit
+			else:
+				current_sequence["switchin"] = unit_side.get_next_available()
+		
 		Dialogic.VAR.Battle.User = current_sequence["switchin"].name
 	
 	Dialogic.start_timeline(current_sequence["timeline"])
