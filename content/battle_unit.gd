@@ -6,4 +6,5 @@ class_name BattleUnit
 @export var sprite: Texture2D
 
 @export var max_hp := 10
-var cur_hp := max_hp
+
+var cur_hp: int

@@ -4,6 +4,11 @@ class_name UnitSide
 ## A group of units taking part of this battle.
 @export var team: Array[BattleUnit]
 
+func _ready() -> void:
+	for bu: BattleUnit in team:
+		bu.cur_hp = bu.max_hp
+
+
 func get_next_available() -> BattleUnit:
 	for bu: BattleUnit in team:
 		if bu.cur_hp:
