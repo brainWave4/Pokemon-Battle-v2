@@ -39,4 +39,8 @@ func set_unit(val: BattleUnit) -> void:
 
 func take_damage(dmg: int) -> void:
 	cur_unit.cur_hp -= dmg
+	
+	if cur_unit.cur_hp < 0:
+		cur_unit.cur_hp = 0
+	
 	cur_hp_is_changed.emit(cur_unit.cur_hp)
