@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Pokemon Battle V2"
 config/tags=PackedStringArray("dialogic", "pokemon")
-run/main_scene="res://content/Main.tscn"
+run/main_scene="res://content/battle/Main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.png"
 
@@ -24,18 +24,18 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 directories/dch_directory={}
 directories/dtl_directory={
-"already_in_battle": "res://content/dialogic/timelines/already_in_battle.dtl",
-"awaiting_commands": "res://content/dialogic/timelines/awaiting_commands.dtl",
-"defeat": "res://content/dialogic/timelines/defeat.dtl",
-"foe_recall": "res://content/dialogic/timelines/foe_recall.dtl",
-"foe_sends_out": "res://content/dialogic/timelines/foe_sends_out.dtl",
-"knocked_out": "res://content/dialogic/timelines/knocked_out.dtl",
-"start_battle": "res://content/dialogic/timelines/start_battle.dtl",
-"too_weak_to_battle": "res://content/dialogic/timelines/too_weak_to_battle.dtl",
-"used_moves": "res://content/dialogic/timelines/used_moves.dtl",
-"victory": "res://content/dialogic/timelines/victory.dtl",
-"you_recall": "res://content/dialogic/timelines/you_recall.dtl",
-"you_send_out": "res://content/dialogic/timelines/you_send_out.dtl"
+"already_in_battle": "res://content/battle/ui/dialogic/timelines/already_in_battle.dtl",
+"awaiting_commands": "res://content/battle/ui/dialogic/timelines/awaiting_commands.dtl",
+"defeat": "res://content/battle/ui/dialogic/timelines/defeat.dtl",
+"foe_recall": "res://content/battle/ui/dialogic/timelines/foe_recall.dtl",
+"foe_sends_out": "res://content/battle/ui/dialogic/timelines/foe_sends_out.dtl",
+"knocked_out": "res://content/battle/ui/dialogic/timelines/knocked_out.dtl",
+"start_battle": "res://content/battle/ui/dialogic/timelines/start_battle.dtl",
+"too_weak_to_battle": "res://content/battle/ui/dialogic/timelines/too_weak_to_battle.dtl",
+"used_moves": "res://content/battle/ui/dialogic/timelines/used_moves.dtl",
+"victory": "res://content/battle/ui/dialogic/timelines/victory.dtl",
+"you_recall": "res://content/battle/ui/dialogic/timelines/you_recall.dtl",
+"you_send_out": "res://content/battle/ui/dialogic/timelines/you_send_out.dtl"
 }
 layout/style_list=[]
 layout/default_style=""

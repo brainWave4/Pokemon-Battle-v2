@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://steu6rpwduei"]
+
+[ext_resource type="PackedScene" uid="uid://dyb27rsqk762q" path="res://content/battle/ui/dialogic/themes/DefaultLayoutBase/UnitBar.tscn" id="1_vuhrp"]
+[ext_resource type="Script" path="res://content/battle/ui/dialogic/themes/DefaultLayoutBase/health_label.gd" id="2_fqjpq"]
+
+[node name="Unit" instance=ExtResource("1_vuhrp")]
+
+[node name="Health" type="Label" parent="VBoxContainer" index="2" node_paths=PackedStringArray("bar")]
+layout_mode = 2
+horizontal_alignment = 2
+script = ExtResource("2_fqjpq")
+bar = NodePath("../HP_Bar")
+
+[connection signal="unit_is_changed" from="." to="VBoxContainer/Health" method="_on_unit_is_changed"]
+[connection signal="value_changed" from="VBoxContainer/HP_Bar" to="VBoxContainer/Health" method="_on_bar_value_changed"]
