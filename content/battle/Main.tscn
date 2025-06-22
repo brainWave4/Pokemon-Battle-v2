@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://xkfk0c5tlhd6"]
+[gd_scene load_steps=38 format=3 uid="uid://xkfk0c5tlhd6"]
 
 [ext_resource type="Script" path="res://content/battle/main.gd" id="1_5vd1s"]
 [ext_resource type="PackedScene" uid="uid://dlrx6rq23rox3" path="res://content/battle/Unit.tscn" id="1_s4xj2"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://steu6rpwduei" path="res://content/battle/ui/dialogic/themes/DefaultLayoutBase/AllyBar.tscn" id="23_3uwp2"]
 [ext_resource type="Script" path="res://content/battle/team.gd" id="24_a6a4m"]
 [ext_resource type="PackedScene" uid="uid://xh5vyb41xi4t" path="res://content/battle/ui/SwitchOption.tscn" id="24_j6g48"]
+[ext_resource type="PackedScene" uid="uid://dgx80rga01vve" path="res://content/battle/ui/MoveOption.tscn" id="25_wvg8l"]
 [ext_resource type="Script" path="res://content/battle/ui/swapin_btn.gd" id="28_15k26"]
 [ext_resource type="Resource" path="res://content/battle/ui/dialogic/timelines/already_in_battle.dtl" id="29_g7l3l"]
 [ext_resource type="Resource" path="res://content/battle/ui/dialogic/timelines/too_weak_to_battle.dtl" id="30_qwkeg"]
@@ -171,20 +172,25 @@ grow_vertical = 0
 [node name="Back" type="Button" parent="Custom/Moves"]
 layout_mode = 2
 text = "Back"
+alignment = 2
 
-[node name="Move1" type="Button" parent="Custom/Moves"]
+[node name="Move1" parent="Custom/Moves" instance=ExtResource("25_wvg8l")]
 layout_mode = 2
+
+[node name="Move" parent="Custom/Moves/Move1/HBoxContainer" index="0"]
 text = "Tackle"
 
-[node name="Move2" type="Button" parent="Custom/Moves"]
+[node name="Move2" parent="Custom/Moves" instance=ExtResource("25_wvg8l")]
 layout_mode = 2
+
+[node name="Move" parent="Custom/Moves/Move2/HBoxContainer" index="0"]
 text = "Horn Drill"
 
-[node name="Move3" type="Button" parent="Custom/Moves"]
+[node name="Move3" parent="Custom/Moves" instance=ExtResource("25_wvg8l")]
 visible = false
 layout_mode = 2
 
-[node name="Move4" type="Button" parent="Custom/Moves"]
+[node name="Move4" parent="Custom/Moves" instance=ExtResource("25_wvg8l")]
 visible = false
 layout_mode = 2
 
@@ -288,10 +294,10 @@ disabled = true
 [connection signal="pressed" from="Custom/Commands/Switch" to="Custom/Team" method="show"]
 [connection signal="pressed" from="Custom/Moves/Back" to="Custom/Commands" method="show"]
 [connection signal="pressed" from="Custom/Moves/Back" to="Custom/Moves" method="hide"]
-[connection signal="pressed" from="Custom/Moves/Move1" to="." method="_on_move_pressed"]
-[connection signal="pressed" from="Custom/Moves/Move1" to="Custom/Moves" method="hide"]
-[connection signal="pressed" from="Custom/Moves/Move2" to="Custom/Moves" method="hide"]
-[connection signal="pressed" from="Custom/Moves/Move2" to="." method="_on_move_pressed" binds= [5]]
+[connection signal="pressed" from="Custom/Moves/Move1/Button" to="." method="_on_move_pressed"]
+[connection signal="pressed" from="Custom/Moves/Move1/Button" to="Custom/Moves" method="hide"]
+[connection signal="pressed" from="Custom/Moves/Move2/Button" to="Custom/Moves" method="hide"]
+[connection signal="pressed" from="Custom/Moves/Move2/Button" to="." method="_on_move_pressed" binds= [5]]
 [connection signal="pressed" from="Custom/Back" to="Custom/Commands" method="show"]
 [connection signal="pressed" from="Custom/Back" to="Custom/Shade" method="hide"]
 [connection signal="pressed" from="Custom/Back" to="Custom/Back" method="hide"]
@@ -309,3 +315,8 @@ disabled = true
 [connection signal="approved_pressed" from="Custom/SelectedTeamOptions/Switch" to="Custom/Team" method="hide"]
 [connection signal="approved_pressed" from="Custom/SelectedTeamOptions/Switch" to="Custom/SelectedTeamOptions" method="hide"]
 [connection signal="pressed" from="Custom/SelectedTeamOptions/Cancel" to="Custom/SelectedTeamOptions" method="hide"]
+
+[editable path="Custom/Moves/Move1"]
+[editable path="Custom/Moves/Move2"]
+[editable path="Custom/Moves/Move3"]
+[editable path="Custom/Moves/Move4"]

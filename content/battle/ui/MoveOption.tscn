@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dgx80rga01vve"]
+
+[node name="Move" type="PanelContainer"]
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Move" type="Label" parent="HBoxContainer"]
+layout_mode = 2
